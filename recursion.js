@@ -38,7 +38,21 @@ function fibonacciRecursive(n){
     return fibonacciRecursive(n-1) + fibonacciRecursive(n-2);
 }
 
-console.log(fibonacciIterative(6)); // -> 8
-// console.log(fibonacciRecursive(6)); // -> 8
 
-// 0 1 1 2 3 5 8 13
+function reverseStringRecursive(str){
+    // base case
+    if(str.length < 2) return str;
+
+    // recursive case
+    return str[str.length-1] + reverseStringRecursive(str.slice(1, str.length - 1)) + str[0];
+}
+
+function reverseStringIterative(str){
+    let ans = '';
+    for(let i = str.length - 1; i >= 0; i--){
+        ans += str[i];
+    }
+    return ans;
+}
+
+console.log(reverseStringIterative('hello world'));
