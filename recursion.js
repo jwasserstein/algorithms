@@ -22,5 +22,23 @@ function findFactorialIterative(number){
     return sum;
 }
 
-console.log(findFactorialRecursive(-3));
-console.log(findFactorialIterative(-3));
+function fibonacciIterative(n){
+    let prevTwo = 0;
+    let prev = 1;
+    let count;
+    for(let i = 1; i < n; i++){
+        count = prev + prevTwo;
+        [prev, prevTwo] = [count, prev];
+    }
+    return count;
+}
+
+function fibonacciRecursive(n){
+    if(n < 2) return n;
+    return fibonacciRecursive(n-1) + fibonacciRecursive(n-2);
+}
+
+console.log(fibonacciIterative(6)); // -> 8
+// console.log(fibonacciRecursive(6)); // -> 8
+
+// 0 1 1 2 3 5 8 13
