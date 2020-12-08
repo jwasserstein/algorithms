@@ -1,4 +1,7 @@
 function findFactorialRecursive(number){
+    if(number === 0) return 1;
+    if(number < 0) return false;
+
     //base case
     if(number === 1){
         return 1;
@@ -9,6 +12,9 @@ function findFactorialRecursive(number){
 }
 
 function findFactorialIterative(number){
+    if(number === 0) return 1;
+    if(number < 0) return false;
+
     let sum = 1;
     for(let i = number; i > 0; i--){
         sum *= i;
@@ -16,5 +22,5 @@ function findFactorialIterative(number){
     return sum;
 }
 
-console.log(findFactorialRecursive(5));
-console.log(findFactorialIterative(5));
+console.log(findFactorialRecursive(-3));
+console.log(findFactorialIterative(-3));
