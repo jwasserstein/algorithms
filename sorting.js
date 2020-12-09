@@ -95,25 +95,7 @@ function merge(arr1, arr2){
     return mergedArr;
 }
 
-function quickSort(arr){  // update to sort in place instead of creating new subarrays.  Use two pointers moving inward swapping when left > right
-    if(arr.length < 2){
-        return arr;
-    }
-
-    let pivot = arr.length - 1;
-    for(let i = pivot - 1; i >= 0; i--){
-        if(arr[i] > arr[pivot]){
-            [arr[i], arr[pivot - 1]] = [arr[pivot - 1], arr[i]];
-            [arr[pivot - 1], arr[pivot]] = [arr[pivot], arr[pivot - 1]];
-            pivot--;
-        }
-    }
-    const first = arr.slice(0, pivot);
-    const second = arr.slice(pivot + 1);
-    return quickSort(first).concat([arr[pivot]], quickSort(second));
-}
-
-function quickSort2(arr, left, right){ // left and right bounds are inclusive
+function quickSort(arr, left, right){ // left and right bounds are inclusive
     left = left !== undefined ? left : 0;
     right = right !== undefined ? right : (arr.length - 1);
 
@@ -139,29 +121,24 @@ function quickSort2(arr, left, right){ // left and right bounds are inclusive
     [arr[pivot], arr[lp]] = [arr[lp], arr[pivot]];
     pivot = lp;
 
-    quickSort2(arr, left, pivot - 1);
-    quickSort2(arr, pivot + 1, right);
+    quickSort(arr, left, pivot - 1);
+    quickSort(arr, pivot + 1, right);
 }
 
 console.time('generation');
 const bigArr = Array(1000000).fill(0).map(() => Math.floor(Math.random()*1000));
 const bigArr2 = bigArr.slice();
 const bigArr3 = bigArr.slice();
-const bigArr4 = bigArr.slice();
 console.timeEnd('generation');
 
 console.time('quick');
 quickSort(bigArr);
 console.timeEnd('quick');
 
-console.time('quick2');
-quickSort2(bigArr2);
-console.timeEnd('quick2');
-
 console.time('merge');
-mergeSort(bigArr3);
+mergeSort(bigArr2);
 console.timeEnd('merge');
 
 console.time('builtin');
-bigArr4.sort((a, b) => a - b);
+bigArr3.sort((a, b) => a - b);
 console.timeEnd('builtin');
