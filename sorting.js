@@ -125,20 +125,54 @@ function quickSort(arr, left, right){ // left and right bounds are inclusive
     quickSort(arr, pivot + 1, right);
 }
 
-console.time('generation');
-const bigArr = Array(1000000).fill(0).map(() => Math.floor(Math.random()*1000));
-const bigArr2 = bigArr.slice();
-const bigArr3 = bigArr.slice();
-console.timeEnd('generation');
+function countingSort(nums){
+    const counts = [];
+    for(let i = 0; i < nums.length; i++){
+        if(counts[nums[i]] === undefined){
+            counts[nums[i]] = 1;
+        } else {
+            counts[nums[i]]++;
+        }
+    }
 
-console.time('quick');
-quickSort(bigArr);
-console.timeEnd('quick');
+    for(let i = 1; i < counts.length; i++){
+        if(counts[i-1] === undefined){
+            counts[i-1] = 0;
+        } else if(counts[i] === undefined){
+            counts[i] = counts[i-1];
+        } else {
+            counts[i] += counts[i-1];
+        }
+        
+    }
 
-console.time('merge');
-mergeSort(bigArr2);
-console.timeEnd('merge');
+    counts.unshift(0);
+    for(let i = 0; i < counts.length - 1; i++){
+        for(let j = counts[i]; j < counts[i+1]; j++){
+            nums[j] = i;
+        }
+    }
+}
 
-console.time('builtin');
-bigArr3.sort((a, b) => a - b);
-console.timeEnd('builtin');
+// console.time('generation');
+// const bigArr = Array(100).fill(0).map(() => Math.floor(Math.random()*1000));
+// const bigArr2 = bigArr.slice();
+// const bigArr3 = bigArr.slice();
+// const bigArr3 = bigArr.slice();
+// console.timeEnd('generation');
+
+// console.time('quick');
+// quickSort(bigArr);
+// console.timeEnd('quick');
+
+// console.time('merge');
+// mergeSort(bigArr2);
+// console.timeEnd('merge');
+
+// console.time('counting');
+// countingSort(bigArr);
+// console.timeEnd('counting');
+
+// console.time('builtin');
+// bigArr4.sort((a, b) => a - b);
+// console.timeEnd('builtin');
