@@ -1,4 +1,4 @@
-// time: O(n), space: O(1)
+// time: O(n^2), space: O(1)
 function bubbleSort(arr, callback) {
   for (let end = arr.length - 1; end > 0; end--) {
     let left = 0;

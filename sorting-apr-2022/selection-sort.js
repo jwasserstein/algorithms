@@ -1,4 +1,4 @@
-// time: O(n), space: O(1)
+// time: O(n^2), space: O(1)
 function selectionSort(arr, callback) {
   for (let i = 0; i < arr.length - 1; i++) {
     let min = arr[i];
